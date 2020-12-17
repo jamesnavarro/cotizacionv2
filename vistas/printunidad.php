@@ -124,6 +124,7 @@
             <?php
 
             function tabla($RR) {
+                include '../modelo/conexion.php';
                 $request = mysqli_query($conexion,"SELECT * FROM producto a, cotizaciones c where c.id_referencia=a.id_p and c.id_cot=" . $_GET["cot"] . " and c.id_compuesto=0 order by c.tip asc");
                 date_default_timezone_set("America/Bogota");
                 $hora = date('h:i:s', time() - 3600 * date('I'));
@@ -307,8 +308,8 @@
                     $table3 = $table3 .'<th width="23%" style="font-size:8px; color:white">' . 'DESCRIPCION' . '</th>';
                     $table3 = $table3 .'<th width="8%" style="font-size:8px; color:white">' . 'UBICACION' . '</th>';
                     $table3 = $table3 .'<th width="8%" style="font-size:8px; color:white">' . 'VIDRIO' . '</th>';
-                    $table3 = $table3 .'<th  width="8%" style="font-size:8px; color:white">' . 'ANCHO X ALTO' . '</th>';
-                    $table3 = $table3 .'<th  width="5%" style="font-size:8px; color:white">' . 'VALOR' . '</th>';
+                    $table3 = $table3 .'<th  width="8%" style="font-size:8px; color:white">' . 'MEDIDAS' . '</th>';
+                    $table3 = $table3 .'<th  width="5%" style="font-size:8px; color:white">' . 'UND. MED' . '</th>';
                     $table3 = $table3 .'<th  width="26%" style="font-size:8px; color:white">' . 'DISEÑO' . '</th>';
                     $table3 = $table3 .'<th  width="3%" style="font-size:8px; color:white">' . 'UND.' . '</th>';
                     $table3 = $table3 .'<th  width="7%" style="font-size:8px; color:white">' . 'VLR. UND.' . '</th>';
@@ -787,14 +788,17 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
                 $pm2 = $ptt2 / $m2; 
                 $pml = $ptt2 / $ml;
                 if($row["cobro"]=='M2'){
-                    $preciound = number_format($pm2).'x'.$row["cobro"];
+                    $preciound = number_format($pm2);
                     $cobro = number_format($m2,2,'.',',').$row["cobro"];
+                    $undidad = $row["cobro"];
                 }elseif($row["cobro"]=='Ml'){
-                    $preciound = number_format($pml).'x'.$row["cobro"];
+                    $preciound = number_format($pml);
                     $cobro = $ml.$row["cobro"];
+                    $undidad = $row["cobro"];
                 }else{
-                    $preciound = number_format($pudt).'x Und';
+                    $preciound = number_format($pudt);
                     $cobro = $row["cantidad_c"].' Und';
+                    $undidad = 'Und';
                 }
                 
     $table3 = $table3.'<tr>'
@@ -804,10 +808,10 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
                        <td width="8%" style="font-size:8px"><p align="center">'.$row["ubicacion_c"].'</p></h6></td>'
                     . '<td width="8%" style="font-size:6px"><p align="center">'.$vi.'<br><br>'.$vi2.'</p></td>             
                        <td  width="8%" style="font-size:8px"><p align="center">'.$med.'<br>'.$row["cantidad_c"].' Und</p></td>'
-                    . '<td  width="5%" style="font-size:8px"><p align="center">'.$preciound.'</p></td>'
+                    . '<td  width="5%" style="font-size:8px"><p align="center">'.$undidad.'</p></td>'
                     . '<td  width="26%"><p align="center">'.$img.' </p></td>
                        <td  width="3%" style="font-size:8px"><p align="center">'.$cobro.' </p></h6></td>
-                       <td  width="7%" style="font-size:8px"><p align="center">$'.number_format($pudt).'</p></td>
+                       <td  width="7%" style="font-size:8px"><p align="center">$'.($preciound).'</p></td>
                        <td  width="8%" style="font-size:8px"><p align="center">$'.number_format($ptt2).'</p></td></tr></div>';   
            $table3 = $table3.'</table>';
 

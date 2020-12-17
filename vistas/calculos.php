@@ -207,7 +207,7 @@ if($request){
 				$tip2 = $row['fila'];
 				$select = $row["desc"];
          }
-        $select = '<select id="unidad'.$row["id_cotizacion"].'" onchange="upund('.$row["id_cotizacion"].')"><option value="'.$row["cobro"].'">'.$row["cobro"].'</option><option value="Ml">Ml</option><option value="M2">M2</option></select>';
+        $select = '<select id="unidad'.$row["id_cotizacion"].'" onchange="upund('.$row["id_cotizacion"].')"><option value="'.$row["cobro"].'">'.$row["cobro"].'</option><option value="Ml">Ml</option><option value="M2">M2</option><option value="94">Und</option></select>';
           
         $select2 = '<input type="HIDDEN" value="'.$row['valor_temp'].'" name="temp'.$cont.'" style="width:90px">'.$row['porcentaje_mp'];
         $vt += $row['valor_temp'] * $row["cantidad_c"];

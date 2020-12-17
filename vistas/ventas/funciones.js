@@ -792,6 +792,7 @@ function actualizaritems(item){
         var pel = $("#pel").val();
         var ins = $("#ins").val();
         var cot = $("#idcot").val();
+        var idcot = $("#id_cotizacion"+item).val();
          var max = $("#max").val();
                 var ser = $("#ser").val();
                 if(ser==='0'){
@@ -803,7 +804,7 @@ function actualizaritems(item){
                 }
         $.ajax({
             post:'GET',
-            data:'ref='+idp+'&pelicula='+pel+'&install='+ins+'&adi='+adi+'&desc='+desc+'&des='+des+'&vid='+idv+'&vid2='+idv2+'&vid3='+idv3+'&vid4='+idv4+'&ancho='+ancho+'&alto='+alto+'&cant='+cant+'&per='+per+'&boq='+boq+'&desc='+desc+'&rep='+rep+'&sw=3',
+            data:'ref='+idp+'&pelicula='+pel+'&idcot='+idcot+'&install='+ins+'&adi='+adi+'&desc='+desc+'&des='+des+'&vid='+idv+'&vid2='+idv2+'&vid3='+idv3+'&vid4='+idv4+'&ancho='+ancho+'&alto='+alto+'&cant='+cant+'&per='+per+'&boq='+boq+'&desc='+desc+'&rep='+rep+'&sw=3',
             url:'../vistas/ventas/acciones.php',
             success:function(d){
                 //alert(d);

@@ -16,7 +16,7 @@ if(isset($_SESSION['k_username'])){
         <script src="../js/jquery-1.5.2.min.js" type="text/javascript"></script>
         <script src="../js/ajax.js" type="text/javascript"></script>
         <link rel="stylesheet" href="../vistas/ventas/estilo.css">
-        <script src="../vistas/ventas/funciones.js?v=1_1_27" type="text/javascript"></script>
+        <script src="../vistas/ventas/funciones.js?v=1_1_28" type="text/javascript"></script>
           <script>
             $( function() {
               $( document ).tooltip();

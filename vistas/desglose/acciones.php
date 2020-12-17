@@ -138,6 +138,7 @@ switch ($_GET['sw']) {
                      $resultc = mysqli_query($conexion,"select color_ta, id_dolar from cotizaciones where id_cotizacion='".$rowp['id_cot_item']."' ");
                      $rc = mysqli_fetch_array($resultc);
                      
+                     
                      //--------- consultar precio referencia del presupuesto-------
                      
                      $pdlr = "select precio_actual from dolar_relaciones where id_referencia=".$rowp['id_referencia']." and id_dolar=".$rc['id_dolar']."  ";
@@ -203,7 +204,7 @@ switch ($_GET['sw']) {
                      $medtotal = ceil($canper) * $rowp['perfil'];
                      
                      $precio_total = ($precio_actual * ($medtotal/1000))+$costo_total_pintura;
-                     $grantotal += $precio_total;
+                     $grantotal += $precio_total; 
                      echo '<tr>'
                              . '<td>'.$contador.'</td>'
                             . '<td>'.ceil($canper).'</td>'
@@ -242,7 +243,7 @@ switch ($_GET['sw']) {
                          . '<td>'.number_format($total_crudo).'</td>'
                          . '<td>'.number_format($total_pintura).'</td>'
                          . '<td>'.number_format($ttppint).'</td>'
-                         . '<td>'.number_format($grantotal).'</td><td></td>';
+                         . '<td>'.number_format($grantotal).'</td><td>-</td>';
                
             break;
              case 4:

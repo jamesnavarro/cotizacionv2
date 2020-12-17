@@ -7,7 +7,7 @@
                 $solicitudes = mysqli_query($conexion,"select count(id_cot) from desgloses_material where id_cot='".$_GET['cot']."' and linea='Perfileria' ");
                 $s = mysqli_fetch_array($solicitudes);
                 
-               $reques=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto=0 and id_cot=".$_GET["cot"]." and linea_cot not in ('Acero') and estado_item='' ORDER BY fila ASC ");
+               $reques=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto=0 and id_cot=".$_GET["cot"]."  and estado_item='' ORDER BY fila ASC ");
                $contador=0;
 	       while($rowp=mysqli_fetch_array($reques)){
             
@@ -467,13 +467,14 @@
                     $entro = 'perfil si';
                  }
                  
-             echo '<input type="hidden" id="itema'.$contador.'" style="width:60px;text-align:center" value="'.$rowp["id_cotizacion"].'">'
+             echo '<tr><input type="hidden" id="item'.$contador.'" style="width:60px;text-align:center" value="'.$rowp["id_cotizacion"].'">'
 
-                      . '<input type="hidden" id="cola'.$contador.'" style="width:60px;text-align:center" value="">'
+                      . '<input type="hidden" id="tipo'.$contador.'" style="width:60px;text-align:center" value="'.$tip.'">'
+                     . '<input type="hidden" id="cola'.$contador.'" style="width:60px;text-align:center" value="">'
                       . '<input type="hidden" id="meda'.$contador.'" style="width:60px;text-align:center" value="">'
                       . '<input type="hidden" id="unda'.$contador.'" style="width:60px;text-align:center" value="'.$rowac["cantidad_m"].'">'
                       . '';
-                echo '<tr>'
+                echo ''
                     . '<td><input type="text" id="cod'.$contador.'" style="width:60px;text-align:center" value="'.$rowac["codigo"].'">*</td>'
                     . '<td>'.$rowac['descripcion'].'</td>'
                         . '<td><input type="text" id="ref'.$contador.'" style="width:60px;text-align:center" value="'.$rowac["referencia"].'"></td>'
@@ -490,7 +491,7 @@
 		
                
 	} 
-            $reques_comp=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto='".$rowp["id_cotizacion"]."' and id_cot=".$_GET["cot"]." and linea_cot not in ('Vidrio','Acero')  ORDER BY fila ASC ");
+            $reques_comp=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto='".$rowp["id_cotizacion"]."' and id_cot=".$_GET["cot"]." and linea_cot not in ('Vidrio')  ORDER BY fila ASC ");
               
 	       while($rowc=mysqli_fetch_array($reques_comp)){
             
@@ -866,7 +867,7 @@
                         
                         $tip= $rowp["tip"];
             echo '<tr><td width="10%" title="">'
-                 . '*<input type="hidden" id="item'.$contador.'" style="width:60px;text-align:center" value="'.$rowp["id_cotizacion"].'">'
+                 . '*=<input type="hidden" id="item'.$contador.'" style="width:60px;text-align:center" value="'.$rowp["id_cotizacion"].'">'
                     . '<input type="hidden" id="tipo'.$contador.'" style="width:60px;text-align:center" value="'.$tip.'">'
                   . '<input type="text" id="cod'.$contador.'" style="width:60px;text-align:center" value="'.$rowrej['codigo'].'"></td>
             
@@ -876,11 +877,11 @@
             <td><input type="text" id="col'.$contador.'" style="width:50px;text-align:center" value="'.$codcol.'" ></td>            
             <td width="10%">'.$sa['dado'].'</a></td>
                 <td width="10%">'.$sa['lado'].'</a></td>
-            <td width="10%"><input type="text" id="med'.$contador.'" style="width:50px;text-align:center" value="'.$medida.'" disabled></td>
+            <td width="10%"><input type="text" id="med'.$contador.'" style="width:50px;text-align:center" value="'.$medrej.'" disabled></td>
             <td>'.number_format($pst,2,',','.').'</font></td>'
-            .'<td class="hidden-phone"><input type="text" id="und'.$contador.'" style="width:50px;text-align:center" value="'.$cantidad.'" disabled></td>
-                <td width="10%"><input type="text" id="medt'.$contador.'" style="width:50px;text-align:center" value="'.$medtotal.'" disabled></td>
-           <td><input type="text" id="can'.$contador.'" style="width:50px;text-align:center" value="'.$canper.'" onchange="modificarcod('.$contador.')"></td>
+            .'<td class="hidden-phone"><input type="text" id="und'.$contador.'" style="width:50px;text-align:center" value="'.$tv2.'" disabled></td>
+                <td width="10%"><input type="text" id="medt'.$contador.'" style="width:50px;text-align:center" value="'.$medrej.'" disabled></td>
+           <td><input type="text" id="can'.$contador.'" style="width:50px;text-align:center" value="'.$cant_item.'" onchange="modificarcod('.$contador.')"></td>
        
             <td><input type="text" id="per'.$contador.'" style="width:50px;text-align:center" value="'.round($perfil,-2).'" onchange="modificarcod('.$contador.')"></td>
        

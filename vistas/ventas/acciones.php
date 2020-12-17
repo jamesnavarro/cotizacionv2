@@ -849,6 +849,11 @@ switch ($_GET['sw']){
         $to = $t * ($desc/100);
         $total = ($t + $to);
         
+        $medida = $_GET['ancho'].'X'.$_GET['alto'];
+       
+        $sqlpedido = "update cotizacion_pedidos set  `medida`='$medida',`cantidad`='$cann',valor_und='$und', valor_total='".($pud * $cann)."' where `id_items`='".$_GET["idcot"]."'; ";
+        $ver2 = mysqli_query($conexion,$sqlpedido); 
+        
         if($und > 5000){
 
         $p = array();
@@ -1265,6 +1270,7 @@ switch ($_GET['sw']){
         $adi= $_GET["adi"];
         $pi = $precioitem * ($desc/100);
         $pitem = $precioitem + $pi;
+        $vtt = $pitem / $cantidad;
         $sql = "update cotizaciones set  `adicional_per`='$adi',`ajuste`='$ajuste',`ubicacion_c`='$ubc',`observaciones`='$obse',`fila`='$fila',`id_vidrio`='$vid',`id_vidrio2`='$vid2',`id_vidrio3`='$vid3',`id_vidrio4`='$vid4', `cantidad_c`='$cantidad', `cant_restante`='$cantidad', `valor_c`= '$p4', `valor_c_sp`='$p5', `valor_fom`='$p6', `valor_fomp`='$p7', `precio_item`='$pitem', `desc`='".$desc."', `per`='$per', `boq`='$boq', `ancho_c`='$ancho', `alto_c`='$alto' where `id_cotizacion`='".$id_cot."'; ";
         $ver = mysqli_query($conexion,$sql) ;
         date_default_timezone_set("America/Bogota" ) ; 
@@ -1273,9 +1279,7 @@ switch ($_GET['sw']){
 
         mysqli_query($conexion,"INSERT INTO `modificaciones` (`id_m`, `descripcion`, `por`, `modulo`, `id_cotizacion`,registro)"
             . " VALUES (NULL, 'Items  $id_cot actualizado por ".$_SESSION['k_username']." ', '".$_SESSION['k_username']."', 'Cotizacion', '".$cot."','$fecha_hoy')");
-        $medida = $ancho.'X'.$alto;
-        $sqlpedido = "update cotizacion_pedidos set  `medida`='$medida',`cantidad`='$cantidad' where `id_items`='".$id_cot."'; ";
-        $ver2 = mysqli_query($conexion,$sqlpedido);
+        
         
         echo $pi;
         break;
@@ -2253,7 +2257,7 @@ $s3 = "SELECT (".$precio.") as p FROM porcentajes where area_por='Vidrio'";
           $uti = $_GET['uti'];
            $costo = $_GET['cos'];
            $ver = mysqli_query($conexion,"update referencias set costo_mt='$costo', utilidad='$uti', modificado='".$_SESSION['k_username']."' where id_referencia='$id' ") ;
-           echo $ver;
+           echo $ver. mysqli_error($conexion);
            break;
         
         

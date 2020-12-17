@@ -7,7 +7,7 @@ include '../../modelo/conexion.php';
                 $solicitudes = mysqli_query($conexion,"select count(id_cot) from desgloses_material where id_cot='".$_GET['cot']."' and linea='Accesorios'  ");
                 $s = mysqli_fetch_array($solicitudes);
                 
-               $reques=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto=0 and id_cot=".$_GET["cot"]." and linea_cot not in ('Acero')  and estado_item=''  ORDER BY fila ASC ");
+               $reques=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto=0 and id_cot=".$_GET["cot"]."   and estado_item=''  ORDER BY fila ASC ");
                $ci=0;
                
 	       while($rowp=mysqli_fetch_array($reques)){
