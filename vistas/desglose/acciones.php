@@ -151,7 +151,7 @@ switch ($_GET['sw']) {
                      $alum_porr = "SELECT costo_a,rendimiento,variable FROM tipo_aluminio where color_a='".$rc[0]."'";
                     $fia4 =mysqli_fetch_array(mysqli_query($conexion,$alum_porr));
                     $vc= $fia4["costo_a"]*$fia4["variable"];  //se le agrego la variable que multiplica la pintura
-                    $rendimiento= $fia4["rendimiento"];
+                    $rendimiento= ($fia4["rendimiento"]==0)? 1:$fia4["rendimiento"];
                     $tipopintura= $fia4["variable"];
                     $canpin = ( $areat * ceil($canper) ) / $rendimiento;
                     $costo_total_pintura = $canpin * $vc;
@@ -221,7 +221,7 @@ switch ($_GET['sw']) {
                              . '<td>'.$area.'</td>'
                              . '<td>'.$areat.'</td>'
                              . '<td>'.$rendimiento.'</td>'
-                             . '<td>'.number_format($canpin,2).'</td>'
+                             . '<td>'.$canpin.'</td>'
                              . '<td>'.number_format($vc).'</td>'
                              . '<td>'.number_format($valor_aluminio).'</td>'
                              . '<td>'.number_format($costo_total_pintura).'</td>'
@@ -387,14 +387,18 @@ switch ($_GET['sw']) {
                      . '<td><input type="text" id="codacc'.$rowp['id_desglose'].'" style="width:80px;text-align:center" value="'.$rowp['codigo_pro'].'" disabled></td>'
                      . '<td><input type="text" id="refacc'.$rowp['id_desglose'].'" style="width:80px;text-align:center" value="'.$rowp['referencia'].'" ></td>'
                      . '<td>'.$descripcion.'</td>'
-                     . '<td>'.$rowp['color'].'</td>'
+                     . '<td><input type="text" id="colacc'.$rowp['id_desglose'].'" style="width:80px;text-align:center" value="'.$rowp['color'].'" onchange="cambiarcolor('.$rowp['id_desglose'].')"></td>'
                      . '<td><input type="text" id="sisacc'.$rowp['id_desglose'].'" style="width:80px;text-align:center" value="'.$rowp['sistema'].'" onclick="cambiarsistema2('.$rowp['id_desglose'].')"></td>' 
                      . '<td>'.number_format($rowp['can']).' '.$rowp['und_medida'].'</td>';
                  }
             break;
         case 10:
               $cot = $_GET['cot'];
-              $query = mysqli_query($conexion,"delete from desgloses_material where id_cot='$cot' ");
+              $query = mysqli_query($conexion,"delete from desgloses_material where id_cot='$cot' and linea='Perfileria' ");
+            break;
+        case 10.5:
+              $cot = $_GET['cot'];
+              $query = mysqli_query($conexion,"delete from desgloses_material where id_cot='$cot' and linea='Accesorios' ");
             break;
         case 11:
               $cot = $_GET['usuario'];
@@ -574,4 +578,29 @@ switch ($_GET['sw']) {
                  echo 'Ocurrio un error y no se actualizo!';
              }
              break;
+               case 24:
+             $col = strtoupper($_GET['col']);
+             $id = $_GET['id'];
+
+             $query = mysqli_query($conexion,"update desgloses_material set color='$col',fecmodifica='".date("Y-m-d H:i:s")."',user='".$_SESSION['k_username']."' where id_desglose='$id' ") ;
+             if($query){
+                  echo 'Se ha editado con exito';
+              }else{
+                  echo 'Hubo un errro al editar el perfil';
+              }
+            break; 
+            case 25:
+          
+             $idcot = $_GET['idcot'];
+                $ref = $_GET['ref'];
+                $linea = $_GET['linea'];
+
+             $query = mysqli_query($conexion,"update desgloses_material set linea='$linea' where id_cot='$idcot' and referencia='$ref' ") ;
+               // $query = mysqli_query($conexion,"CALL cambiar_linearef ($idcot,$ref) ") ;
+             if($query){
+                  echo 'Se ha editado con exito';
+              }else{
+                  echo 'Hubo un errro al editar el perfil'. mysqli_error($conexion);
+              }
+            break; 
 }

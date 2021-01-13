@@ -1265,6 +1265,7 @@ usuarios_activos();
                                 <input type="<?php echo $dbu ?>" id="precio_dolar" style="width:80px" value="<?php echo $precio_dolar_actual ?>" onchange="cambiardollar()"> <button onclick="histodolar()">H</button>
                                 <span id="cargandoo"></span>
                             </li>
+<!--                            <li>  <marquee bgcolor="yellow"><img src="papa.gif" style="width: 40px"> Feliz Navidad y Prospero A&ntilde;o Nuevo </marquee></li>-->
                         </ul>
                         <!--/ Breadcrumb -->
 

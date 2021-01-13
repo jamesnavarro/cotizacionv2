@@ -358,7 +358,7 @@ echo  ''.$ci.'</td>'
   }
         
             
-            $reques_comp=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto='".$rowp["id_cotizacion"]."' and id_cot=".$_GET["cot"]." and linea_cot not in ('Vidrio','Acero')  ORDER BY fila ASC ");
+            $reques_comp=mysqli_query($conexion,"SELECT * FROM cotizaciones where id_compuesto='".$rowp["id_cotizacion"]."' and id_cot=".$_GET["cot"]." and linea_cot not in ('Vidrio')  ORDER BY fila ASC ");
               
 	       while($rowc=mysqli_fetch_array($reques_comp)){
             

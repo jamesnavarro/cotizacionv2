@@ -43,7 +43,7 @@ session_start();
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
     <script src="../js/jquery-1.5.2.min.js" type="text/javascript"></script>
-    <script src="../vistas/desglose/funciones.js?v=4.4" type="text/javascript"></script>
+    <script src="../vistas/desglose/funciones.js?v=4.7" type="text/javascript"></script>
     <script> 
         $(function() {
             mostrar(<?php echo $_GET['cot']; ?>);
@@ -71,6 +71,7 @@ session_start();
         <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" <?php echo $dis ?>>Mandar PreSolicitud</button>
         <span id="estsol"><?php echo $estsol; ?></span>
         <button class="btn btn-info" data-toggle="modal" data-target="#ModalConfiguracion" <?php echo $dis ?>>Configuracion</button>
+             <button class="btn btn-info" data-toggle="modal" data-target="#ModalLinea" <?php echo $dis ?>>Cambiar de Lineas</button>
 <!--         <button class="btn btn-danger" data-toggle="modal" data-target="#ModalDesglose" <?php echo $dis ?>>Notas del Desglose</button>-->
         <hr>
    <ul class="nav nav-tabs" id="myTab">
@@ -97,7 +98,8 @@ session_start();
                                        
                                         <div class="datagrid"> 
                                             <div style="text-align:right">
-                                                <button onclick="reiniciar()">Reiniciar Desglose</button>
+                                                <button onclick="reiniciar()">Reiniciar Desglose Aluminio</button>
+                                                <button onclick="reiniciar2()">Reiniciar Desglose Accesorios</button>
                                                 <button onclick="procesar()">Procesar DT..</button>
                                             </div>
                                             <div style="width:100%; height:600px; overflow: scroll;">
@@ -481,6 +483,45 @@ session_start();
           </table>
       </div>
       <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="ModalLinea" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog  modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cambiar de referencias</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <table style="width:100%" class="table table-bordered table-striped table-hover"> 
+              <tr>
+                  <td>Referencia</td>
+                  <td>Linea a pasar</td>
+              </tr>
+              <tr>
+                  <td><input type="text" id="c_ref" class="form controls" style="width:80px"></td>
+                  <td>
+                      <select class="form controls" id="c_linea">
+                          <option value="">Seleccione</option>
+                          <option value="Perfileria">Perfileria</option>
+                          <option value="Accesorios">Accesorios</option>
+                      </select>
+                  </td>
+          
+              </tr>
+              <tbody id="mostrar_notas">
+                  
+              </tbody>
+          </table>
+      </div>
+      <div class="modal-footer">
+          <button type="button" class="btn btn-primary" onclick="pasar_ref()">Cambiar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
     </div>

@@ -997,7 +997,7 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
                   $valor_acabado = $vc * $perimetro * ($row21["med"]/1000) ;
                }
              $ddm = (((($prt3*$mt + $desm+$valor_acabado) * $row21["cantidad_mat"]))/0.46275);
-             $to_mat = $to_mat + $ddm;
+            
              if($estado=='En proceso'){ 
              if($editar_cot=='Habilitado'){$ver='<img src="../imagenes/modificar.png">';}else{$ver='';}
              if($eliminar_cot=='Habilitado'){$del='<img src="../imagenes/eliminar.png">';}else{$del='';}
@@ -1010,6 +1010,10 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
                  $cm = 'Color: '.$row21['color_ma'];
              }
              $totalpintado = ($prt3*$mt) + $valor_acabado;
+             
+             $ta = $ddm * 1.19;
+              $ttt = $ta / 1.2595;
+              $to_mat = $to_mat + $ttt;
 
                     $table2 = $table2 . '<tr><td width="5%" style="font-size:10px;" align="center">' . $total2 . '</a></td>'
                             . '<td width="10%" style="font-size:8px;" align="center">' . $row21['codigo'] . '</font></td>'
@@ -1017,8 +1021,8 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
                             . '<td width="10%" style="font-size:8px;" align="center">' . $row21["referencia"] . '<font></a></td>'
                             . '<td width="10%" style="font-size:8px;" align="center">' . $row21["med"] . '</td>'
                             . '<td width="10%" style="font-size:8px;" align="center">' . $row21["cantidad_mat"] . '</td>'
-                            . '<td width="10%" style="font-size:8px;" align="center">$' . number_format($ddm / $row21["cantidad_mat"]) . '</td>'
-                            . '<td width="10%" style="font-size:8px;" align="center">' . number_format($ddm) . '</td>'
+                            . '<td width="10%" style="font-size:8px;" align="center">$' . number_format($ttt / $row21["cantidad_mat"]) . '</td>'
+                            . '<td width="10%" style="font-size:8px;" align="center">' . number_format($ttt) . '</td>'
                             . '</tr>';
                 }
                 $table2 = $table2 . '</table>';
@@ -1029,8 +1033,8 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
                 //echo '<h5><p align="right">TOTAL SUMINISTROS.: $<strong>' . number_format($to_mat) . '</strong></p></h5>';
                 echo "<br>";
                 echo '<table  align="right" class="estilo2" border="1"  cellpadding="0" cellspacing="0">'
-                . '<tr BGCOLOR="#13173B"><td style="font-size:80%;color:white;" width="180px" align="right">TOTAL SUMINISTROS.: $<td align="right" width="100px" style="font-size:80%;color:white;">' . number_format($to_mat) . '</td></tr>'
-                . '</table><br>';
+                   . '<tr BGCOLOR="#13173B"><td style="font-size:80%;color:white;" width="180px" align="right">TOTAL SUMINISTROS.: $<td align="right" width="100px" style="font-size:80%;color:white;">' . number_format($to_mat) . '</td></tr>'
+                   . '</table><br>';
             } else {
                 $to_mat = 0;
             }
@@ -1111,7 +1115,7 @@ if($row['msg']!=''){$noti='<br><b> <font color="red">'.$row['msg'].' </b>';}else
             	echo "<br>";
 		echo "<br>";
 		//if(isset($_GET['extra'])){
-                  $aiu_total= $aiu_total_serv + $aiu_total;
+                  $aiu_total= $aiu_total_serv + $aiu_total+$to_mat;
                  $aiu_adm = $aiu_total * 0.1;
                             $aiu_imp = $aiu_total * 0.1;
                             $aiu_uti = $aiu_total * 0.05;

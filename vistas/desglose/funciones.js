@@ -322,6 +322,21 @@ function selectAll(sw,ch,idcot,c) {
         });
     }
     }
+    function reiniciar2(){
+        var cot = $("#cot").val();
+        var c = confirm("Esta seguro de reestablecer el desglose?");
+        if(c){
+        $.ajax({
+            post:'GET',
+            data:'cot='+cot+'&sw=10.5',
+            url:'desglose/acciones.php',
+            success:function(d){
+                //alert(d);
+                mostrar(cot);
+            } 
+        });
+    }
+    }
     
     function mostrar_desglose(){
        var cot = $("#cot").val();
@@ -478,6 +493,23 @@ function selectAll(sw,ch,idcot,c) {
             success:function(d){
             alert(d);
             mostrar_desglose();
+              } 
+            });
+         }
+    }
+    
+        function cambiarcolor(id){
+         var col = $("#colacc"+id).val();
+
+         var c = confirm("Esta seguro  de cambiar el color");
+         if(c){
+            $.ajax({
+            post:'GET',
+            data:'id='+id+'&col='+col+'&sw=24',
+            url:'desglose/acciones.php',
+            success:function(d){
+            alert(d);
+
               } 
             });
          }
@@ -771,6 +803,25 @@ function vidrios(){
         $.ajax({
             post:'GET',
             data:'idvidrio='+id+'&tipo='+ti+'&item='+it+'&sw=23',
+            url:'desglose/acciones.php',
+            success:function(d){
+                alert(d);
+               
+            } 
+        });
+    }
+    function pasar_ref(){
+        var idcot = $("#cot").val();
+        var ref = $("#c_ref").val();
+         var linea = $("#c_linea").val();
+         //alert(it+' c: '+c);
+         if(ref=='' || linea==''){
+             alert("Debes de llenar los 2 campos!");
+             return false;
+         }
+        $.ajax({
+            post:'GET',
+            data:'idcot='+idcot+'&ref='+ref+'&linea='+linea+'&sw=25',
             url:'desglose/acciones.php',
             success:function(d){
                 alert(d);
